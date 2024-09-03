@@ -1,3 +1,5 @@
+import "dart:js_interop_unsafe";
+
 import "package:flutter/material.dart";
 
 class CalculatorScreen extends StatelessWidget {
@@ -8,47 +10,15 @@ class CalculatorScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Scientific Calculator"),
+        backgroundColor: Colors.orange.shade600,
       ),
-      body: Row(
+      body: Column(
         children: [
-          // Row(
-          //   children: [
-          Expanded(
+          const Expanded(
             flex: 1,
             child: Row(
-              children: <Widget>[
-                Expanded(
-                  flex: 1,
-                  child: Container(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 1, horizontal: 12),
-                    child: const Text("One"),
-                  ),
-                ),
-                Expanded(
-                  flex: 1,
-                  child: Container(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 1, horizontal: 12),
-                    child: const Text("Two"),
-                  ),
-                ),
-                Expanded(
-                  flex: 1,
-                  child: Container(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 1, horizontal: 12),
-                    child: const Text("Three"),
-                  ),
-                ),
-                Expanded(
-                  flex: 3,
-                  child: Container(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 1, horizontal: 12),
-                    child: const Text("Main"),
-                  ),
-                ),
+              children: [
+                Text("Results"),
               ],
             ),
           ),
@@ -114,11 +84,11 @@ class CalculatorScreen extends StatelessWidget {
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.all(4),
-        child: ElevatedButton(
+        child: TextButton(
           onPressed: () => _buttonPressed(text),
           child: Text(
             text,
-            style: const TextStyle(fontSize: 24.0),
+            style: const TextStyle(fontSize: 22.0),
           ),
         ),
       ),
