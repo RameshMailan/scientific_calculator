@@ -1,9 +1,39 @@
-import "dart:js_interop_unsafe";
-
 import "package:flutter/material.dart";
 
-class CalculatorScreen extends StatelessWidget {
-  const CalculatorScreen({super.key});
+class CalculatorScreen extends StatefulWidget {
+  CalculatorScreen({super.key});
+
+  @override
+  State<CalculatorScreen> createState() => _CalculatorScreenState();
+}
+
+class _CalculatorScreenState extends State<CalculatorScreen> {
+  String _display = "0";
+
+  void _buttonPressed(String text) {
+    setState(() {
+      if (text == "C") {
+        _display = "0";
+      } else if (text == "=") {
+        try {
+          _display = _evaluateExpression(_display).toString();
+        } catch (e) {
+          _display = "Error";
+        }
+      } else {
+        if (_display == "0") {
+          _display = text;
+        } else {
+          _display += text;
+        }
+      }
+    });
+  }
+
+  double _evaluateExpression(String expression) {
+    // Simple evaluation; consider using a package for more complex expression
+    return double.parse(expression);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -14,11 +44,14 @@ class CalculatorScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
-          const Expanded(
+          Expanded(
             flex: 1,
             child: Row(
               children: [
-                Text("Results"),
+                Text(
+                  _display,
+                  style: const TextStyle(fontSize: 48),
+                ),
               ],
             ),
           ),
@@ -76,10 +109,7 @@ class CalculatorScreen extends StatelessWidget {
     );
   }
 
-  void _buttonPressed(String text) {
-    print("Button pressed: $text");
-  }
-
+  // void _buttonPressed(String text) {
   Widget _buildButton(String text) {
     return Expanded(
       child: Padding(
