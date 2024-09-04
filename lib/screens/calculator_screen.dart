@@ -9,9 +9,13 @@ class CalculatorScreen extends StatefulWidget {
 
 class _CalculatorScreenState extends State<CalculatorScreen> {
   String _display = "0";
+  final List<Widget> _buttons = [];
 
   void _buttonPressed(String text) {
     setState(() {
+      if (text == "sci") {
+        _addButton();
+      }
       if (text == "C") {
         _display = "0";
       } else if (text == "=") {
@@ -33,6 +37,22 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   double _evaluateExpression(String expression) {
     // Simple evaluation; consider using a package for more complex expression
     return double.parse(expression);
+  }
+
+  void _addButton() {
+    // ignore: unused_element
+    setState() {
+      _buttons.add(
+        Column(
+          children: [
+            _buildButton("Deg"),
+            _buildButton("X!"),
+            _buildButton("1/X"),
+            _buildButton("")
+          ],
+        ),
+      );
+    }
   }
 
   @override
@@ -59,6 +79,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
             flex: 1,
             child: Column(
               children: [
+                // _addButton(),
                 Row(
                   children: [
                     _buildButton("AC"),
@@ -93,7 +114,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                 ),
                 Row(
                   children: [
-                    _buildButton("Sci-Fi"),
+                    _buildButton("sci"),
                     _buildButton("0"),
                     _buildButton("."),
                     _buildButton("=")
