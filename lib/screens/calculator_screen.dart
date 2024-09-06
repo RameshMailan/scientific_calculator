@@ -9,6 +9,13 @@ class CalculatorScreen extends StatefulWidget {
 
 class _CalculatorScreenState extends State<CalculatorScreen> {
   String _display = "0";
+  bool _isExpanded = false;
+
+  void _toggleExpanded() {
+    setState(() {
+      _isExpanded = !_isExpanded;
+    });
+  }
 
   void _buttonPressed(String text) {
     setState(() {
@@ -45,7 +52,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
       body: Column(
         children: [
           Expanded(
-            flex: 1,
+            flex: 3,
             child: Row(
               children: [
                 Text(
@@ -57,9 +64,38 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
           ),
           Expanded(
             flex: 1,
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 5000),
+              curve: Curves.easeInOut,
+              height: _isExpanded ? 120 : 0, //Adjust height based on your needs
+              child: _isExpanded
+                  ? Column(
+                      children: [
+                        Row(
+                          children: [
+                            _buildButton("sin"),
+                            _buildButton("cos"),
+                            _buildButton("tan"),
+                            _buildButton("sqrt"),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            _buildButton("log"),
+                            _buildButton("ln"),
+                            _buildButton("exp"),
+                            _buildButton("pi"),
+                          ],
+                        ),
+                      ],
+                    )
+                  : null,
+            ),
+          ),
+          Expanded(
+            flex: 3,
             child: Column(
               children: [
-                // _addButton(),
                 Row(
                   children: [
                     _buildButton("AC"),
@@ -94,17 +130,26 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                 ),
                 Row(
                   children: [
-                    _buildButton("sci"),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: TextButton(
+                          onPressed: _toggleExpanded,
+                          child: Text(
+                            _isExpanded ? "sci-in" : "sci-out",
+                            style: const TextStyle(fontSize: 22.0),
+                          ),
+                        ),
+                      ),
+                    ),
                     _buildButton("0"),
                     _buildButton("."),
-                    _buildButton("=")
+                    _buildButton("="),
                   ],
                 ),
               ],
             ),
           ),
-          //   ],
-          // ),
         ],
       ),
     );
