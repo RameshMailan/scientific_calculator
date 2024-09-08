@@ -136,7 +136,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                         child: TextButton(
                           onPressed: _toggleExpanded,
                           child: Text(
-                            _isExpanded ? "sci-in" : "sci-out",
+                            _isExpanded ? "sci" : "sci",
                             style: const TextStyle(fontSize: 22.0),
                           ),
                         ),
