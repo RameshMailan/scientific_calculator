@@ -1,4 +1,6 @@
 import "package:flutter/material.dart";
+import "package:scientific_calculator2/utils/calculator_logic.dart";
+import "calculator_screen.dart";
 
 class CalculatorScreen extends StatefulWidget {
   CalculatorScreen({super.key});
@@ -10,6 +12,7 @@ class CalculatorScreen extends StatefulWidget {
 class _CalculatorScreenState extends State<CalculatorScreen> {
   String _display = "0";
   bool _isExpanded = false;
+  CalculatorLogic logic = CalculatorLogic();
 
   void _toggleExpanded() {
     setState(() {
@@ -20,7 +23,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   void _buttonPressed(String text) {
     setState(() {
       if (text == "C") {
-        _display = "0";
+        _display = logic.clear();
       } else if (text == "=") {
         try {
           _display = _evaluateExpression(_display).toString();
