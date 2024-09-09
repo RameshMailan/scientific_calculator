@@ -1,6 +1,5 @@
 import "package:flutter/material.dart";
 import "package:scientific_calculator2/utils/calculator_logic.dart";
-import "calculator_screen.dart";
 
 class CalculatorScreen extends StatefulWidget {
   CalculatorScreen({super.key});
@@ -22,27 +21,16 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
 
   void _buttonPressed(String text) {
     setState(() {
-      if (text == "C") {
+      if (text == "AC") {
         _display = logic.clear();
+      } else if (text == "Del") {
+        _display = logic.delete(_display);
       } else if (text == "=") {
-        try {
-          _display = _evaluateExpression(_display).toString();
-        } catch (e) {
-          _display = "Error";
-        }
+        _display = logic.evaluate(_display);
       } else {
-        if (_display == "0") {
-          _display = text;
-        } else {
-          _display += text;
-        }
+        _display = logic.formatDisplay(_display, text);
       }
     });
-  }
-
-  double _evaluateExpression(String expression) {
-    // Simple evaluation; consider using a package for more complex expression
-    return double.parse(expression);
   }
 
   @override
@@ -56,13 +44,15 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
         children: [
           Expanded(
             flex: 3,
-            child: Row(
-              children: [
-                Text(
+            child: Align(
+              alignment: Alignment.centerRight,
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Text(
                   _display,
                   style: const TextStyle(fontSize: 48),
                 ),
-              ],
+              ),
             ),
           ),
           Expanded(
@@ -158,7 +148,6 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
     );
   }
 
-  // void _buttonPressed(String text) {
   Widget _buildButton(String text) {
     return Expanded(
       child: Padding(
