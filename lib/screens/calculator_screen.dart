@@ -2,7 +2,7 @@ import "package:flutter/material.dart";
 import "package:scientific_calculator2/utils/calculator_logic.dart";
 
 class CalculatorScreen extends StatefulWidget {
-  CalculatorScreen({super.key});
+  const CalculatorScreen({super.key});
 
   @override
   State<CalculatorScreen> createState() => _CalculatorScreenState();
