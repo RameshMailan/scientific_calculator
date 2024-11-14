@@ -78,7 +78,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                             _buildButton("("),
                             _buildButton(")"),
                             _buildButton("1/X"),
-                            _buildButton("exp(x)"),
+                            _buildButton("exp"),
                           ],
                         ),
                       ],
