@@ -36,6 +36,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
         title: const Text("Scientific Calculator"),
         backgroundColor: Colors.orange.shade600,
@@ -50,7 +51,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
                   _display,
-                  style: const TextStyle(fontSize: 48),
+                  style: const TextStyle(fontSize: 48, color: Colors.grey),
                 ),
               ),
             ),
@@ -60,24 +61,24 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
             child: AnimatedContainer(
               duration: const Duration(milliseconds: 5000),
               curve: Curves.easeInOut,
-              height: _isExpanded ? 120 : 0, //Adjust height based on your needs
+              height: _isExpanded ? 180 : 0, //Adjust height based on your needs
               child: _isExpanded
                   ? Column(
                       children: [
                         Row(
                           children: [
-                            _buildButton("sin"),
-                            _buildButton("cos"),
-                            _buildButton("tan"),
-                            _buildButton("sqrt"),
+                            _buildButton("X!"),
+                            _buildButton("x^y"),
+                            _buildButton("√"),
+                            _buildButton("π"),
                           ],
                         ),
                         Row(
                           children: [
-                            _buildButton("log"),
-                            _buildButton("ln"),
-                            _buildButton("exp"),
-                            _buildButton("pi"),
+                            _buildButton("("),
+                            _buildButton(")"),
+                            _buildButton("1/X"),
+                            _buildButton("exp(x)"),
                           ],
                         ),
                       ],
@@ -151,7 +152,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   Widget _buildButton(String text) {
     return Expanded(
       child: Padding(
-        padding: const EdgeInsets.all(4),
+        padding: const EdgeInsets.all(3),
         child: TextButton(
           onPressed: () => _buttonPressed(text),
           child: Text(

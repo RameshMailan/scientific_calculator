@@ -11,9 +11,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: "Scientific Calculator",
       theme: ThemeData(
-        primarySwatch: Colors.indigo,
+        primarySwatch: Colors.grey,
       ),
       home: CalculatorScreen(),
     );
