@@ -55,7 +55,7 @@ class CalculatorLogic {
   // Replace scientific operations like π, exp(x), x^y with actual values
   String _replaceScientificOperations(String expression) {
     expression = expression.replaceAll("π", math.pi.toString());
-    //  expression = expression.replaceAll("exp(x)", "exp");
+    ////  expression = expression.replaceAll("exp(x)", "exp");
     expression = expression.replaceAll("x^y", "^");
     return expression;
   }
